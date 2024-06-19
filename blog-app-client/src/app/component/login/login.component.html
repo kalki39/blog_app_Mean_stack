@@ -1,0 +1,35 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-center">
+            <h4>Login</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="loginId" formControlName="loginId">
+                <div *ngIf="submitted && loginForm.controls['loginId'].errors" class="text-danger">
+                  <div *ngIf="loginForm.controls['loginId'].errors['required']">loginId is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" formControlName="password" class="form-control" id="password" placeholder="Password">
+                <div *ngIf="submitted && loginForm.controls['password'].errors" class="invalid-feedback">
+                  <div *ngIf="loginForm.controls['password'].errors['required']">Password is required</div>
+                  <div *ngIf="loginForm.controls['password'].errors['minlength']">Password must be at least 6 characters</div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <a routerLink="/register">Don't have an account? Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

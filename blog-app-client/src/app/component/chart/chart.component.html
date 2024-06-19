@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="chart">
+        <div class="mobileName">Mobile</div>
+        <div class="count">Sales</div>
+        <div class="bar" *ngFor="let item of data" [ngStyle]="{'background-color':item.bg,'height':(item.count/max)*100+'%'}">
+        <span class="tooltip">{{item.name}}-{{item.count}}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+
+
+.boxes{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    width: fit-content;
+    gap: 5px;
+}
+
+.box{
+    width: 50px;
+    height: 50px;
+    border: 1px solid green;
+    transition: all 300ms ease-in-out;
+}
+.hide{
+    opacity: 0;
+    cursor: not-allowed;
+}
+
+.added{
+    background-color: brown;
+}

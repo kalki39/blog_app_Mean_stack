@@ -10,7 +10,6 @@ AuthRouter.get("/register", (req, res) => {
 
 AuthRouter.post("/register", async (req, res) => {
   const { name, email, password, username } = req.body;
-
   //data validation
   try {
     await cleanUpAndValidate({ name, email, password, username });

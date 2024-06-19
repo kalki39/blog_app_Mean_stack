@@ -1,0 +1,31 @@
+.board{
+    height: 100vh;
+    position: relative;
+}
+
+button{
+    background-color: green;
+    color: wheat;
+    padding: 10px 15px;
+    border: none;
+    margin: 10px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.board button:active{
+    transform: scale(0.9);
+}
+
+.dot{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-100%,-50%);
+}
+
+.dis{
+    cursor: not-allowed;
+}

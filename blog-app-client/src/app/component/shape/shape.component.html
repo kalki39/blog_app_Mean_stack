@@ -1,0 +1,12 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="boxes">
+            <!-- <ng-template *ngFor="let box of data">
+                <div class="box"></div>
+            </ng-template> -->
+            <div class="box" *ngFor="let box of data;let i = index" [ngClass]="{'hide': box == 0,'added': check(i)}"  (click)="validate(box,i)"></div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-center">
+            <h4>Register</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" formControlName="name" id="name" required>
+                <div *ngIf="registerForm.controls['name'].errors" class="my-2 text-danger">
+                    <div *ngIf="registerForm.controls['name'].errors['required'] && registerForm.touched">*Name is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="username">UserName</label>
+                <input type="text" class="form-control" formControlName="username" id="username" required>
+                <div *ngIf="registerForm.controls['username'].errors" class="my-2 text-danger">
+                    <div *ngIf="registerForm.controls['username'].errors['required'] && registerForm.touched">*userName is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" formControlName="email" required>
+                <div *ngIf="registerForm.controls['email'].errors" class="my-2 text-danger">
+                    <div *ngIf="registerForm.controls['email'].errors['required'] && registerForm.touched">*email is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" formControlName="password" id="password" required>
+                <div *ngIf="registerForm.controls['password'].errors" class="my-2 text-danger">
+                    <div *ngIf="registerForm.controls['password'].errors['required'] && registerForm.touched">*password is required</div>
+                    <div *ngIf="registerForm.controls['password'].errors['minlength'] && registerForm.touched">*Min length of password is 6 letters</div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block my-3">Register</button>
+            </form>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <a routerLink="/login">Already have an account? Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

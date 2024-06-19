@@ -1,3 +1,4 @@
+const FollowSchema = require("../Schemas/FollowSchema");
 const UserSchema = require("../Schemas/UserSchema");
 const bcrypt = require("bcrypt");
 const ObjectId = require("mongodb").ObjectId;
@@ -35,6 +36,34 @@ let User = class {
       } catch (error) {
         reject(error);
       }
+    });
+  }
+
+  static findpeople({currentUserId}) {
+    console.log("object",currentUserId+"");
+    return new Promise(async (resolve, reject) => {
+      try {
+        const followingList = await FollowSchema.find({ currentUserId })
+        console.log("followingList",followingList);
+        // console.log("up",[...followingUserId,currentUserId.currentUserId]);
+        let followingUserId = [];
+        followingList.forEach((followObj) => {
+        followingUserId.push(followObj.followingUserId);
+        })
+        console.log("ids",followingUserId);
+        followingUserId.push(currentUserId+"")
+        let followingDetails= await UserSchema.find({
+                _id: { $nin: followingUserId }
+        })
+
+        console.log(followingDetails);
+    if(followingDetails){
+        resolve(followingDetails)
+    }
+        
+    } catch (error) {
+        reject(error)
+    }
     });
   }
 
@@ -98,7 +127,7 @@ let User = class {
         if (!userDb) {
           reject(`No user corresponding to this ${userId}`);
         }
-
+        console.log("userDb",userDb);
         resolve(userDb);
       } catch (error) {
         reject(error);

@@ -10,6 +10,12 @@ const blogsSchema = new Schema({
     type: String,
     required: true,
   },
+  username: {
+    type: String
+  },
+  img: {
+    type: String
+  },
   creationDateTime: {
     type: String,
     required: true,

@@ -1,0 +1,8 @@
+<div class="container">
+    <div class="board" (click)="addDot($event)">
+        <button (click)="undo($event)" [ngClass]="{'dis':list.length==0}">undo</button>
+        <button (click)="redo($event)" [ngClass]="{'dis':history.length==0}">redo</button>
+        <button (click)="reset($event)">reset</button>
+        <div *ngFor="let item of list" class="dot" [ngStyle]="{'background-color':item.bg,'top':item.y+'px','left':item.x+'px'}"></div>
+    </div>
+</div>

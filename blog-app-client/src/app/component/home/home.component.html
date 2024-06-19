@@ -1,0 +1,136 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand">Blog app</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page">Home</a>
+        </li> -->
+        <li class="nav-item">
+            <button class="btn btn-outline-success"routerLink="/create">New +</button>
+        </li>
+        <!-- <li class="nav-item d-flex justify-content-center align-items-center mx-3">
+            <img [src]='currentUser.img' class="img" alt="" srcset="">
+            <span class="size">{{ currentUser.name }}</span>
+        </li> -->
+        <!-- <div class="dropdown nav-item">
+             <button class="dropbtn btn btn-outline-success">
+                <img [src]="currentUser.img" [alt]="currentUser.img + '\'s profile picture'" class="profile-pic">
+            <span class="user-name">{{ currentUser.username }}</span>
+             </button>
+         
+        <div class="dropdown-content">
+            <button class="btn btn-outline-success " (click)="logout()">Logout</button>
+        </div>  
+    </div>   -->
+             
+        <div class="navbar-content mx-3">
+            <img [src]="currentUser.img" [alt]="currentUser.img + '\'s profile picture'" class="profile-pic">
+            <span class="user-name">{{ currentUser.username }}</span>
+        </div>
+        <div class="dropdown-content">
+            <button class="btn btn-outline-success w-100" (click)="logout()">Logout</button>
+        </div>
+        <li>
+            <button class="btn btn-outline-success" (click)="logout()">Logout</button>
+        </li>
+        <!-- <div class="dropdown">
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropbtn navbar-content mx-3">
+                <img [src]="currentUser.img" [alt]="currentUser.img + '\'s profile picture'" class="profile-pic">
+                <span class="user-name">{{ currentUser.username }}</span>
+            </div>
+            <div class="dropdown-content">
+            <button class="btn btn-outline-success w-100" (click)="logout()">Logout</button>
+            </div>
+          </div> -->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid mt-2" *ngIf="!isEdit">
+    <div class="card text-center my-3">
+        <div class="btn-group mt-0" role="group" aria-label="Profile Actions">
+            <button type="button" class="homeBtn btn btn-outline-primary active" [ngClass]="{'active':activeBtn==0}" (click)="getAllBlog()">All Blog</button>
+            <button type="button" class="homeBtn btn btn-outline-primary active" [ngClass]="{'active':activeBtn==1}" (click)="getBlogs()">My Blog</button>
+            <button type="button" class="homeBtn btn btn-outline-primary" [ngClass]="{'active':activeBtn==2}" (click)="getFollowersList()">Followers</button>
+            <button type="button" class="homeBtn btn btn-outline-primary" [ngClass]="{'active':activeBtn==3}" (click)="getFollowingList(true)">Following</button>
+            <button type="button" class="homeBtn btn btn-outline-primary" [ngClass]="{'active':activeBtn==4}" (click)="findPeople()">Find People</button>
+          </div>
+      <!-- <div class="card-header">
+        <li class="nav-item d-flex justify-content-center align-items-center me-3">
+            <a class="nav-link" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+          </svg></a>
+              <span class="size">{{ currentUser.username }}</span>
+          </li>
+      </div>
+      <div class="card-body">
+        
+      </div> -->
+    </div>
+ </div>
+<div *ngIf="loading" class="text-center mt-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<div class="container-fluid mt-3" *ngIf="!loading &&updatedList.length && (activeBtn==2 || activeBtn==3 || activeBtn== 4)">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"  *ngFor="let user of updatedList">
+                <div class="card">
+                    <img [src]="user.img" class="usercard" alt="Card Image">
+                    <div class="d-flex p-2 justify-content-between">
+                        <h5 class="card-title">{{user.name}}</h5>
+                        <p class="card-text">@{{user.username}}</p>
+                    </div>
+                    <button class="btn btn-primary" *ngIf="activeBtn==2 && !user.following || activeBtn==4" (click)="follow(user)">Follow</button>
+                    <button class="btn btn-primary" *ngIf="activeBtn==3 || user.following" (click)="unfollow(user)">Unfollow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> 
+<div class="container-fluid">
+  <div class="card" *ngIf="!isEdit && blogs.length>0 && (activeBtn==1 || activeBtn==0)">
+    <h3 class="card-header m-0">My Blogs</h3>
+    <div class="card-body" *ngFor="let blog of blogs">
+        <div class="viewer-body my-2">
+            <img [src]="blog.img" [alt]="blog.img + '\'s profile picture'" class="view-pic">
+            <div class="viewer">
+                <p class="blog-head">{{ blog.title }}</p>
+                <span>@{{ blog.username }}</span>
+            </div>
+        </div>
+      
+      <p class="card-text">{{ blog.textBody }}</p>
+      <a class="btn btn-warning m-1" *ngIf="activeBtn==1" (click)="edit(blog)">Edit</a>
+      <a class="btn btn-danger" *ngIf="activeBtn==1" (click)="deleteBlog(blog)">Delete</a>
+      <hr />
+    </div>
+  </div>
+  <div *ngIf="!loading">
+      <h3 class="m-5 card-body text-center text-danger" *ngIf="!blogs.length && activeBtn==1">You not created any blog!!</h3>
+      <h3 class="m-5 card-body text-center text-danger" *ngIf="!blogs.length && activeBtn==0">Follow more people to get blog!!</h3>
+      <h3 class="m-5 card-body text-center text-danger" *ngIf="!updatedList.length && activeBtn==2">You have 0 Followers!!</h3>
+      <h3 class="m-5 card-body text-center text-danger" *ngIf="!updatedList.length && activeBtn==3">You are not following any person. Please find people!!</h3>
+  </div>
+
+  <app-create-blog *ngIf="isEdit" [blog]="editBoldData" [isEdit]="isEdit" (goback)="changeState($event)"></app-create-blog>
+
+</div>
+
