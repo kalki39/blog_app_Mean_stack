@@ -10,15 +10,15 @@ import { CanActivate, Router } from '@angular/router';
 import { AuthGuardService } from './service/auth-guard.service';
 import { CreateBlogComponent } from './component/create-blog/create-blog.component';
 
-
 const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'create', component: CreateBlogComponent },
   { path: 'uber', component: ShapeComponent },
   { path: 'click', component: ClickBoardComponent },
-  { path: 'chart', component: ChartComponent,canActivate:[AuthGuardService] },
+  { path: 'chart', component: ChartComponent, canActivate: [AuthGuardService] },
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
