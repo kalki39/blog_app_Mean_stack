@@ -17,7 +17,7 @@ const PORT = process.env.PORT;
 server.use(
   cors({
     // origin: 'http://localhost:4200',
-    origin: "https://blog-app-mean-stack.onrender.com",
+    origin: "https://blog-app-mean-stack-3jqa.onrender.com",
     credentials: true,
   })
 );
