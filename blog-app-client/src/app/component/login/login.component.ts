@@ -22,13 +22,13 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.getCurrentUser()) {
-      this.router.navigate(['/home']);
-    }
     this.loginForm = this.formBuilder.group({
       loginId: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+    if (this.getCurrentUser()) {
+      this.router.navigate(['/home']);
+    }
   }
 
   get f() {
