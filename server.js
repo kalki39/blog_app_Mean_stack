@@ -14,11 +14,30 @@ const server = express();
 const PORT = process.env.PORT;
 
 // Middleware for CORS
+// server.use(
+//   cors({
+//     // origin: 'http://localhost:4200',
+//     // origin: "https://blog-app-mean-stack-3jqa.onrender.com",
+//     origin: "*",
+//     // credentials: true,
+//   })
+// );
+
+const allowedOrigins = ['http://localhost:4200', 'https://blog-app-mean-stack-3jqa.onrender.com'];
+
 server.use(
   cors({
-    // origin: 'http://localhost:4200',
-    origin: "https://blog-app-mean-stack-3jqa.onrender.com",
-    credentials: true,
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true
   })
 );
 

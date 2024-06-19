@@ -33,9 +33,10 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     if (!this.getCurrentUser()) {
       this.router.navigate(['/login']);
+    }else{
+      this.currentUser = this.getCurrentUser();
+      this.getBlogs();
     }
-    this.currentUser = this.getCurrentUser();
-    this.getBlogs();
   }
 
   getCurrentUser() {
@@ -47,7 +48,7 @@ export class HomeComponent implements OnInit {
     this.activeBtn = 1;
     this.loading = true;
     this.blogs = [];
-    this.apicallService.getBlogs(this.currentUser.userId).subscribe(
+    this.apicallService.getBlogs(this.currentUser?.userId).subscribe(
       (response: any) => {
         this.loading = false;
         this.blogs = response.date; // Adjust based on your API response structure
