@@ -14,10 +14,13 @@ const server = express();
 const PORT = process.env.PORT;
 
 // Middleware for CORS
-server.use(cors({
-  origin: 'http://localhost:4200', // Replace with the URL of your Angular app
-  credentials: true,
-}));
+server.use(
+  cors({
+    // origin: 'http://localhost:4200',
+    origin: "https://blog-app-mean-stack.onrender.com",
+    credentials: true,
+  })
+);
 
 //middlwares
 server.use(bodyParser.json());
@@ -51,7 +54,7 @@ server.get("/", (req, res) => {
   });
 });
 // server.use("/auth", AuthRouter);
-server.use("/",UserRouter);
+server.use("/", UserRouter);
 server.use("/", isAuth, BlogRouter);
 server.use("/", isAuth, FollowRouter);
 server.listen(PORT, (req, res) => {
