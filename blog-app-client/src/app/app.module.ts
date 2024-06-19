@@ -16,7 +16,7 @@ import { ClickBoardComponent } from './component/click-board/click-board.compone
 import { ChartComponent } from './component/chart/chart.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { CreateBlogComponent } from './component/create-blog/create-blog.component';
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,15 +26,25 @@ import { CreateBlogComponent } from './component/create-blog/create-blog.compone
     HomeComponent,
     ClickBoardComponent,
     ChartComponent,
-    CreateBlogComponent
+    CreateBlogComponent,
   ],
   imports: [
-    BrowserModule,CommonModule,
-    AppRoutingModule,FormsModule,ReactiveFormsModule,HttpClientModule,MatSnackBarModule,BrowserAnimationsModule
+    BrowserModule,
+    CommonModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
   ],
   schemas: [NO_ERRORS_SCHEMA],
-  providers: [ApicallService,AuthGuardService],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    ApicallService,
+    AuthGuardService
+  ],
   bootstrap: [AppComponent]
 
 })
-export class AppModule { }
+export class AppModule {}
