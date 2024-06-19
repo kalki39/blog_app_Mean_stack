@@ -4,74 +4,85 @@ import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApicallService {
+  private baseUrl = 'https://blog-app-mean-stack.onrender.com'; // Replace with your actual API base URL
 
-  private baseUrl = 'https://blog-app-mean-stack.onrender.com/`; // Replace with your actual API base URL
-
-  constructor(private http: HttpClient,private st:StorageService) { }
+  constructor(private http: HttpClient, private st: StorageService) {}
 
   login(data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`${this.baseUrl}/login`, data,{headers});
+    return this.http.post(`${this.baseUrl}/login`, data, { headers });
   }
 
   register(data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`${this.baseUrl}/register`, JSON.stringify(data),{headers});
+    return this.http.post(`${this.baseUrl}/register`, JSON.stringify(data), {
+      headers,
+    });
   }
 
-  getCall(){
+  getCall() {
     return this.http.get(`${this.baseUrl}/`);
   }
 
-  getBlogs(userId:String): Observable<any> {
+  getBlogs(userId: String): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get(`${this.baseUrl}/myblogs/${userId}`, { headers });
   }
-  getAllBlogs(userId:String): Observable<any> {
+  getAllBlogs(userId: String): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get(`${this.baseUrl}/allblogs/${userId}`, { headers });
   }
-  createBlogs(userId:String,data:any): Observable<any> {
+  createBlogs(userId: String, data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`${this.baseUrl}/create-blog/${userId}`, data ,{ headers });
+    return this.http.post(`${this.baseUrl}/create-blog/${userId}`, data, {
+      headers,
+    });
   }
-  editBlogs(userId:String,data:any): Observable<any> {
+  editBlogs(userId: String, data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put(`${this.baseUrl}/editblog`, data ,{ headers });
+    return this.http.put(`${this.baseUrl}/editblog`, data, { headers });
   }
-  deleteBlogs(data:any): Observable<any> {
+  deleteBlogs(data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`${this.baseUrl}/deleteblog`, data ,{ headers });
+    return this.http.post(`${this.baseUrl}/deleteblog`, data, { headers });
   }
   logout(): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`${this.baseUrl}/logout`, { headers });
   }
 
-  getFollowersList(userId:String): Observable<any> {
+  getFollowersList(userId: String): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get(`${this.baseUrl}/followersList/${userId}`, { headers });
+    return this.http.get(`${this.baseUrl}/followersList/${userId}`, {
+      headers,
+    });
   }
 
-  getFollowingList(userId:String): Observable<any> {
+  getFollowingList(userId: String): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get(`${this.baseUrl}/followingList/${userId}`, { headers });
+    return this.http.get(`${this.baseUrl}/followingList/${userId}`, {
+      headers,
+    });
   }
 
-  findPeople(userId:String): Observable<any> {
+  findPeople(userId: String): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get(`${this.baseUrl}/findpeople/${userId}`, { headers });
   }
 
-  unfollowUser(userId:String,data: any): Observable<any> {
+  unfollowUser(userId: String, data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`${this.baseUrl}/unfollowuser/${userId}`, data,{headers});
+    return this.http.post(`${this.baseUrl}/unfollowuser/${userId}`, data, {
+      headers,
+    });
   }
-  followUser(userId:String,data: any): Observable<any> {
+  followUser(userId: String, data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`${this.baseUrl}/followuser/${userId}`, data,{headers});
+    return this.http.post(`${this.baseUrl}/followuser/${userId}`, data, {
+      headers,
+    });
   }
 }
