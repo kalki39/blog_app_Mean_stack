@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   editBoldData: any = {};
   activeBtn = 1;
   loading = false;
+  isCollapsed=false;
 
   constructor(
     private apicallService: ApicallService,
@@ -37,6 +38,10 @@ export class HomeComponent implements OnInit {
       this.currentUser = this.getCurrentUser();
       this.getBlogs();
     }
+  }
+
+  togglenav(){
+    this.isCollapsed=!this.isCollapsed
   }
 
   getCurrentUser() {

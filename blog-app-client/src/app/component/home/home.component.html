@@ -9,52 +9,26 @@
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation"
+      (click)="togglenav()"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': isCollapsed }" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page">Home</a>
-        </li> -->
-        <li class="nav-item">
-            <button class="btn btn-outline-success"routerLink="/create">New +</button>
-        </li>
-        <!-- <li class="nav-item d-flex justify-content-center align-items-center mx-3">
-            <img [src]='currentUser.img' class="img" alt="" srcset="">
-            <span class="size">{{ currentUser.name }}</span>
-        </li> -->
-        <!-- <div class="dropdown nav-item">
-             <button class="dropbtn btn btn-outline-success">
-                <img [src]="currentUser.img" [alt]="currentUser.img + '\'s profile picture'" class="profile-pic">
-            <span class="user-name">{{ currentUser.username }}</span>
-             </button>
-         
-        <div class="dropdown-content">
-            <button class="btn btn-outline-success " (click)="logout()">Logout</button>
-        </div>  
-    </div>   -->
-             
         <div class="navbar-content mx-3">
             <img [src]="currentUser.img" [alt]="currentUser.img + '\'s profile picture'" class="profile-pic">
             <span class="user-name">{{ currentUser.username }}</span>
         </div>
+        <li class="nav-item me-3">
+            <button class="btn btn-outline-success"routerLink="/create">New +</button>
+        </li>             
+        
         <div class="dropdown-content">
             <button class="btn btn-outline-success w-100" (click)="logout()">Logout</button>
         </div>
         <li>
             <button class="btn btn-outline-success" (click)="logout()">Logout</button>
         </li>
-        <!-- <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
-            <div class="dropbtn navbar-content mx-3">
-                <img [src]="currentUser.img" [alt]="currentUser.img + '\'s profile picture'" class="profile-pic">
-                <span class="user-name">{{ currentUser.username }}</span>
-            </div>
-            <div class="dropdown-content">
-            <button class="btn btn-outline-success w-100" (click)="logout()">Logout</button>
-            </div>
-          </div> -->
       </ul>
     </div>
   </div>

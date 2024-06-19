@@ -103,3 +103,16 @@ img{
     // background-color: #3e8e41;
     color: white;
   }
+
+  .show{
+    button{
+        width: 100%;
+    }
+    li{
+        margin-block: 5px;
+        margin-right: 0 !important;
+    }
+    .navbar-content {
+        margin-block: 5px;
+    }
+  }
