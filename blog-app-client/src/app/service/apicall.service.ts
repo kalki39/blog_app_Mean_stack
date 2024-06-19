@@ -8,7 +8,7 @@ import { StorageService } from './storage.service';
 })
 export class ApicallService {
 
-  private baseUrl = 'https://blog-app-mean-stack.onrender.com/; // Replace with your actual API base URL
+  private baseUrl = 'https://blog-app-mean-stack.onrender.com/`; // Replace with your actual API base URL
 
   constructor(private http: HttpClient,private st:StorageService) { }
 
